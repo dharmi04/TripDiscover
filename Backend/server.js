@@ -1,0 +1,31 @@
+const express = require('express');
+require('dotenv').config();
+
+const bodyParser = require('body-parser');
+const userRoutes = require('./Routes/User.js'); // Import the router
+const DestinationRoutes = require('./Routes/Destination.js'); 
+const GuideRoutes = require('./Routes/Guide.js');
+const TourRoutes = require('./Routes/Tours.js');
+const BookingRoutes = require('./Routes/Booking.js');
+const app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use('/api', userRoutes); // Mount the router at /api
+app.use('/api', DestinationRoutes);
+app.use('/api', GuideRoutes);
+app.use('/api', TourRoutes);
+app.use('/api', BookingRoutes);
+
+
+
+app.use((req, res, next) => {
+  console.log(req.path, req.method);
+  next();
+});
+
+// syncModels(); // If this is an asynchronous operation, handle it properly before starting the server
+
+app.listen(process.env.PORT, () => {
+  console.log('Listening to port', process.env.PORT);
+});
