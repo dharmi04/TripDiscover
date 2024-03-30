@@ -31,6 +31,10 @@ const Tour = sequelize.define('Tour', {
       key: 'destination_id'
     }
   },
+  tour_name: {
+    type: DataTypes.TEXT, // Assuming the tour name is a string
+    allowNull: false
+  },
   guide_id: {
     type: DataTypes.INTEGER,
     allowNull: false,

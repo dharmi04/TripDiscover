@@ -5,7 +5,7 @@ const Guide = require('../Models/Guide');
 // Controller function to add a tour for a specific destination
 exports.addTour = async (req, res) => {
   try {
-    const { destination_id, guide_id, start_date, duration, price } = req.body;
+    const { destination_id, guide_id,tour_name, start_date, duration, price } = req.body;
 
     // Find the destination ID based on the provided name
     // const destination = await Destination.findOne({ where: { name: destination_id } });
@@ -15,7 +15,7 @@ exports.addTour = async (req, res) => {
     // }
 
     // Create the tour
-    const tour = await Tour.create({ destination_id, guide_id, start_date, duration, price });
+    const tour = await Tour.create({ destination_id, guide_id,tour_name, start_date, duration, price });
 
     res.status(201).json({ tour });
   } catch (error) {
