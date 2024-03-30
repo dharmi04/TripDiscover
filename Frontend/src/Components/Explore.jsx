@@ -44,22 +44,22 @@ const Explore = () => {
 
   return (
     <div className='bg-black'>
-      <div className='w-3/4 mx-auto '>
-        <h1 className='font-Montserrat uppercase text-accent text-center justify-center font-semibold text-5xl pt-20 pb-5'>Explore</h1>
-        <div className=" grid grid-cols-3 grid-rows-1 text-white space-x-5 ">
-          {places.map((place, index) => (
-            <div className="max-w-sm rounded-xl overflow-hidden shadow-lg border-white border-[1px] ransition-transform duration-300 transform hover:scale-105" key={index}>
-              <img src={place.image} alt={place.name} className="w-full h-[350px]" />
-              <div className="px-3 py-4">
-                <div className="text-2xl font-serif">{place.name}</div>
-                <p className="text-gray-400 text-base">{place.info}</p>
-              </div>
+    <div className='w-3/4 mx-auto '>
+      <h1 className='font-Montserrat uppercase text-accent text-center justify-center font-semibold text-5xl pt-20 pb-5'>Explore</h1>
+      <div className="grid md:grid-cols-3 grid-cols-1 grid-rows-3 md:grid-rows-1 text-white md:space-x-5 md:mb-0 mb-6 md:space-y-0 space-y-6">
+        {places.map((place, index) => (
+          <div className="max-w-sm rounded-xl overflow-hidden shadow-lg border-white border-[1px] ransition-transform duration-300 transform hover:scale-105" key={index}>
+            <img src={place.image} alt={place.name} className="w-full h-[350px]" />
+            <div className="px-3 py-4">
+              <div className="text-2xl font-serif">{place.name}</div>
+              <p className="text-gray-400 text-base">{place.info}</p>
             </div>
-          ))}
-        </div>
-        <a href="/destinations"><p  className='font-Montserrat text-accent text-center  font-normal text-2xl pt-4 pb-6'>Explore More</p></a>
+          </div>
+        ))}
       </div>
+      <a href="/destinations"><p className='font-Montserrat text-accent text-center  font-normal text-2xl pt-4 pb-6'>Explore More</p></a>
     </div>
+  </div>
   );
   
 };

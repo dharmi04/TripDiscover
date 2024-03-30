@@ -10,16 +10,16 @@ import Kerela from '../assets/Kerela.png';
 const Discover = () => {
   return (
     <div className='bg-black'>
-      <div className='w-3/4 mx-auto flex flex-row '>
-        <div className='w-1/2'>
+      <div className='w-3/4 mx-auto flex md:flex-row flex-col '>
+        <div className='md:w-1/2 '>
           <div className='pt-10'>
-            <p className='font-Montserrat uppercase text-5xl font-semibold text-accent pb-5'>DISCOVER INDIA</p>
-            <p className='font-Montserrat uppercase text-5xl font-semibold text-accent pb-5'> IN A</p>
-            <p className='font-Montserrat uppercase text-5xl font-semibold text-accent pb-5'>NEW WAY</p>
+            <p className='font-Montserrat uppercase md:text-5xl text-3xl font-semibold text-accent pb-5'>DISCOVER INDIA</p>
+            <p className='font-Montserrat uppercase  md:text-5xl text-3xl  font-semibold text-accent pb-5'> IN A</p>
+            <p className='font-Montserrat uppercase  md:text-5xl text-3xl  font-semibold text-accent pb-5'>NEW WAY</p>
           </div>
-          <p className='text-xl font-light text-white pr-4 pt-5'>Embark on a journey with Trip Discover and experience India like never before. Our innovative approach offers you unique insights into the country's rich tapestry of culture, history, and breathtaking landscapes, making every adventure unforgettable.</p>
+          <p className='text-xl font-light text-white md:pr-4 pr-0 pt-5'>Embark on a journey with Trip Discover and experience India like never before. Our innovative approach offers you unique insights into the country's rich tapestry of culture, history, and breathtaking landscapes, making every adventure unforgettable.</p>
         </div>
-        <div className='w-1/2'>
+        <div className='md:w-1/2'>
           <div className='space-y-4'>
             <div className="grid grid-cols-3 grid-row-1 space-y-8 ">
               {/* Empty divs for the first two columns */}

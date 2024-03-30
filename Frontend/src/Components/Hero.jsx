@@ -8,8 +8,8 @@ const Hero = () => {
         <div className="bg-hero-pattern bg-cover h-full"></div>
       </div>
       {/* Content */}
-      <div className='flex flex-col justify-center items-center text-primary font-Montserrat text-xl p-8 relative z-10'>
-        <div className="flex space-x-20 uppercase">
+      <div className='flex flex-col justify-center items-center text-primary font-Montserrat md:text-xl text-sm p-8 relative z-10'>
+        <div className="flex md:space-x-20 space-x-4 uppercase">
           <div>Home</div>
           <div>Tours</div>
           <div>Destination</div>
