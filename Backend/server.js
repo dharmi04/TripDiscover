@@ -1,5 +1,6 @@
 const express = require('express');
 require('dotenv').config();
+const cors = require('cors'); // Import cors package
 
 const bodyParser = require('body-parser');
 const userRoutes = require('./Routes/User.js'); // Import the router
@@ -10,6 +11,8 @@ const BookingRoutes = require('./Routes/Booking.js');
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(cors()); // Enable CORS for all routes
 
 app.use('/api', userRoutes); // Mount the router at /api
 app.use('/api', DestinationRoutes);
