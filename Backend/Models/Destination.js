@@ -30,6 +30,6 @@ const Destination = sequelize.define('Destination', {
     type: DataTypes.STRING,
     allowNull: true
   }
-});
+},{ timestamps: false });
 
 module.exports = Destination;

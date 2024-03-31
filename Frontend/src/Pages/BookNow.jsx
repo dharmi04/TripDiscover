@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Footer = () => {
+const BookNow = () => {
   return (
     <div>
-      
+      Book Now
     </div>
   )
 }
 
-export default Footer
+export default BookNow

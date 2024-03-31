@@ -78,3 +78,14 @@ exports.getAllToursWithNames = async (req, res) => {
     }
   };
 
+
+  exports.getToursByDestinationId = async (req, res) => {
+    try {
+        const { destinationId } = req.params;
+        const tours = await Tour.findAll({ where: { destination_id: destinationId } });
+        res.status(200).json({ tours });
+    } catch (error) {
+        console.error('Error fetching tours:', error);
+        res.status(500).json({ message: 'Server Error' });
+    }
+};

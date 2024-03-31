@@ -47,13 +47,13 @@ const Discover = () => {
       </div>
       {/* Footer with social media links using react-icons */}
       <div className="flex justify-center items-center mt-10 pb-4 ">
-        <a href="#" className="mr-4 text-white">
+        <a href="#" className="mr-4 text-accent">
           <FaFacebookF className='w-[30px] h-[30px]' />
         </a>
-        <a href="#" className="mr-4 text-white">
+        <a href="#" className="mr-4 text-accent">
           <FaTwitter className='w-[30px] h-[30px]' />
         </a>
-        <a href="#" className="mr-4 text-white">
+        <a href="#" className="mr-4 text-accent">
           <FaInstagram className='w-[30px] h-[30px]'/>
         </a>
       </div>

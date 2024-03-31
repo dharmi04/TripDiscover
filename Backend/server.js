@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cors()); // Enable CORS for all routes
 
-app.use('/api', userRoutes); // Mount the router at /api
+app.use('/api', userRoutes);
 app.use('/api', DestinationRoutes);
 app.use('/api', GuideRoutes);
 app.use('/api', TourRoutes);
