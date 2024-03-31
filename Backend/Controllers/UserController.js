@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const saltRounds = 10;
 
 const createToken = (_id) => {
-  return jwt.sign({ _id }, process.env.SECRET, { expiresIn: '3d' });
+  return jwt.sign({ _id }, process.env.SECRET, { expiresIn: '100d' });
 };
 
 exports.createUser = async (req, res) => {

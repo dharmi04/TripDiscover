@@ -11,6 +11,7 @@ export default {
         Montserrat: ["Montserrat", "sans-serif"]
       },
       backgroundImage: {
+        // 'hero-pattern': "url('/src/assets/gateway.jpeg')",
         'hero-pattern': "url('/src/assets/Himalayas.jpg')",
         'India': "url('/src/assets/India2.jpeg')",
         'Background': "url('/src/assets/background.png')"

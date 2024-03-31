@@ -4,7 +4,8 @@ const Hero = () => {
   return (
     <div className="relative h-[600px]">
       {/* Background image with blur effect */}
-      <div className="absolute inset-0" style={{ filter: 'blur(3px)', WebkitFilter: 'blur(8px)' }}>
+      {/* style={{ filter: 'blur(3px)', WebkitFilter: 'blur(8px)' }} */}
+      <div className="absolute inset-0" >
         <div className="bg-hero-pattern bg-cover h-full"></div>
       </div>
       {/* Content */}
@@ -15,7 +16,7 @@ const Hero = () => {
           <div>Destination</div>
           <div>Gallery</div>
         </div>
-        <div className="text-center mt-20 font-PlayfairDisplay font-bold text-5xl text-primary mb-3">
+        <div className="text-center mt-20 pt-20 font-PlayfairDisplay font-bold text-5xl text-primary mb-3">
           Trip Discover
         </div>
         <div className='text-center  font-PlayfairDisplay font-bold text-2xl text-primary'>

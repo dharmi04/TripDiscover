@@ -8,7 +8,8 @@ import BookNow from './Pages/BookNow';
 
 
 import Login from './Pages/Login';
-//import SignUp from './Pages/Signup';
+import SignUp from './Pages/SignUp';
+import ToursPage from './Pages/ToursPage';
 
 
 
@@ -20,9 +21,9 @@ function App() {
         <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/destinations" element={<Destinations />} />
-        <Route path="/tours/:id" element={<Tours />} />
+        <Route path="/tours/:id" element={<ToursPage />} />
         <Route path="/booknow" element={<BookNow />} />
-        {/* <Route path="/signup" element={<SignUp />} /> */}
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         </Routes>
       </Router>

@@ -1,35 +1,47 @@
 import React, { useState } from 'react';
 import axios from 'axios'; // Import axios
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import tourism from '../assets/Toursim1.jpeg';
 
 
 const Login = () => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: '',
         password: '',
     });
 
     const handleChange = (e) => {
-        const { name, value } = e.target; // Corrected: Use name instead of email
+        const { name, value } = e.target;
         setFormData((prevData) => ({
             ...prevData,
             [name]: value,
         }));
     };
 
-
-
     const handleSubmit = (e) => {
         e.preventDefault();
-        const token = localStorage.getItem('token');
-        axios.get('http://localhost:8000/api/login-user', {
-            headers: {
-                'Authorization': `Bearer ${token}` // Include the token in the 'Authorization' header
-            }
-        })
+        if (formData.email === "" || formData.password === "") {
+            toast.error("Please fill all the fields")
+            return
+          }
+
+        //   try{
+        //      axios.post('http://localhost:8000/api/login-user', formData,{
+        //         withCredentials: true,
+        //     })
+
+
+        //     navigate('/')
+        //   }
+      
+        axios.post('http://localhost:8000/api/login-user', formData),{
+            withCredentials: true,
+        
+        } // Send formData in the request body
             .then(response => {
-                Navigate('/')
+                localStorage.setItem('token', response.data.token);
+                navigate('/'); // Redirect to home page
             })
             .catch(error => {
                 console.error("Login error:", error);

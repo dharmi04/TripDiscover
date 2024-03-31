@@ -35,14 +35,14 @@ const Tour = sequelize.define('Tour', {
     type: DataTypes.TEXT, // Assuming the tour name is a string
     allowNull: false
   },
-  guide_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: 'Guides',
-      key: 'guide_id'
-    }
-  },
+  // guide_id: {
+  //   type: DataTypes.INTEGER,
+  //   allowNull: false,
+  //   references: {
+  //     model: 'Guides',
+  //     key: 'guide_id'
+  //   }
+  // },
   start_date: {
     type: DataTypes.DATE,
     allowNull: false
@@ -59,6 +59,6 @@ const Tour = sequelize.define('Tour', {
 
 
 Tour.belongsTo(Destination, { foreignKey: 'destination_id' });
-Tour.belongsTo(Guide, { foreignKey: 'guide_id' });
+// Tour.belongsTo(Guide, { foreignKey: 'guide_id' });
 
 module.exports = Tour;
