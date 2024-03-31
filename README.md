@@ -18,29 +18,24 @@ TourFinder is a web application that helps users discover and book tours to spec
    git clone https://github.com/dharmi04/tourfinder.git
    ```
 
-2. Install dependencies:
-
+   #Backend
    ```bash
-   cd tourfinder
+   cd Backend
+   ```
+
+   2. Install dependencies using npm 
+   ```bash
    npm install
    ```
+   3. Set up mysql database named "Tourfinder"
+   4. Create a `.env` file in the Backend Folder containing:
+   DB_HOST=localhost
+   DB_USER=root
+   DB_PASSWORD= your_password
+   DB_NAME= database_name
+   PORT=8000
+   SECRET= secret_key_for_auth
 
-3. Set up the MySQL database:
-
-   - Create a MySQL database.
-   - Update the database configuration in `config.js` with your database credentials.
-
-4. Run the application:
-
+   4. Start the server
    ```bash
-   npm start
-   ```
-
-5. Visit `http://localhost:3000` in your web browser to access the TourFinder application.
-
-## Usage
-
-- Explore tours: Discover available tours by searching for specific destinations.
-- Book tours: Reserve your spot on a tour by providing your details and completing the booking process.
-
-
+   npm run dev```
