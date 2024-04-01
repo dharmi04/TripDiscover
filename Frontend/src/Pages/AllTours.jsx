@@ -19,22 +19,22 @@ const AllTours = () => {
   }, []);
 
   return (
-    <div className="bg-black p-4">
+    <div className=" p-4">
       <h2 className="font-Montserrat uppercase text-accent text-center justify-center font-semibold text-5xl pt-20 pb-5">All Tours</h2>
-      <div className="flex flex-wrap text-white w-3/4 mx-auto items-center justify-center">
-        <ul>
+      <div className="flex flex-wrap text-black w-3/4 mx-auto items-center justify-center p-4">
+        <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
           {tours.map(tour => (
-            <li key={tour.tour_id} className="card m-2 border-[2px] border-white rounded-xl transition-transform duration-300 transform hover:scale-105">
-              <div className="card-body">
-                <p>Tour ID: {tour.tour_id}</p>
+            <li key={tour.tour_id} className="card m-2 border-[2px] border-black rounded-xl overflow-hidden hover:shadow-lg transition duration-300">
+              <div className="card-body text-black p-4">
+                <p className="font-bold text-lg mb-2">Tour Name: {tour.tour_name}</p>
                 <p>Start Date: {tour.start_date}</p>
                 <p>Duration: {tour.duration} days</p>
                 <p>Price: ${tour.price}</p>
                 <p>Destination: {tour.Destination.name}</p>
                 <p>Description: {tour.Destination.description}</p>
                 <p>Location: {tour.Destination.location}</p>
-                <div className=' p-3 text-white'>
-                <Link to={`/book/${tour.tour_id}`}>Book Now</Link>
+                <div className=" text-center py-2 mt-4">
+                  <Link to={`/book/${tour.tour_id}`} className="text-white font-bold hover:underlinec bg-primary rounded-md p-3">Book Now</Link>
                 </div>
               </div>
             </li>

@@ -23,27 +23,41 @@ const ToursPage = () => {
   }, [destinationId]);
 
   return (
-    <div className="bg-black p-4">
-      <h2 className="font-Montserrat uppercase text-accent text-center justify-center font-semibold text-5xl pt-20 pb-5">Tours</h2>
-      <div className="flex flex-wrap text-white w-3/4 mx-auto items-center justify-center">
-        <ul>
-          {tours.map(tour => (
-            <li key={tour.tour_id} className="card m-2 border-[2px] border-white rounded-xl transition-transform duration-300 transform hover:scale-105">
-              <div className="card-body">
-                <p>Tour Name: {tour.tour_name}</p>
-                <p>Destination Name: {tour.destination_name}</p>
-                <p>Start Date: {tour.start_date}</p>
-                <p>Duration: {tour.duration} days</p>
-                <p>Price: ${tour.price}</p>
-                <div className='bg-accent p-3 text-white'>
-                  {/* Use Link component to navigate to BookNow page */}
-                  <Link to={`/book/${tour.tour_id}`}>Book Now</Link>
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
+    <div className="">
+      <div class="bg-primary p-4">
+        <div class="overflow-hidden">
+          <div class="animate-marquee flex flex-row space-x-7">
+            <p class="text-lg text-white">"Limited time offer: Book now and unlock special discounts on our top-rated tours. Don't miss out</p>
+            <p class="text-lg text-white">Experience luxury redefined with our VIP tour packages. Elevate your journey to extraordinary!</p>
+            <p class="text-lg text-white">Embark on an adventure of a lifetime with our exclusive tours! Unforgettable memories await</p>
+            <p class="text-lg text-white">Ready for an adventure? Our tours combine excitement, comfort, and authenticity for the ultimate travel experience</p>
+            <p class="text-lg text-white">Indulge in the spicy flavors of Indian cuisine!</p>
+          </div>
+        </div>
       </div>
+      <h2 className="font-Montserrat uppercase text-accent text-center justify-center font-semibold text-5xl pt-20 pb-5">Tours</h2>
+      <div className="flex flex-wrap text-black w-3/4 mx-auto items-center justify-center">
+  <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+    {tours.map(tour => (
+      <li key={tour.tour_id} className="card m-2 border-[2px] border-black rounded-xl overflow-hidden hover:shadow-lg transition duration-300">
+        <div className="card-body text-black p-4">
+          <p className="font-bold text-lg mb-2">Tour Name: {tour.tour_name}</p>
+          <p><span className="font-bold">Destination:</span> {tour.destination_name}</p>
+          <p><span className="font-bold">Start Date:</span> {tour.start_date}</p>
+          <p><span className="font-bold">Duration:</span> {tour.duration} days</p>
+          <p><span className="font-bold">Price:</span> ${tour.price}</p>
+          <div className=" text-center py-2 mt-4">
+            {/* Use Link component to navigate to BookNow page */}
+            <Link to={`/book/${tour.tour_id}`} className="text-white font-bold hover:underlinec bg-primary rounded-md p-3">Book Now</Link>
+          </div>
+          <p className="mt-2 text-sm text-gray-500">Limited slots available! Book now to secure your spot and embark on an unforgettable journey.</p>
+        </div>
+      </li>
+    ))}
+  </ul>
+</div>
+
+
     </div>
   );
 };

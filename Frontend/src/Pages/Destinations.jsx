@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import '../App.css'
 import { Link, useParams } from 'react-router-dom';
+import image1 from '../assets/nature1.jpeg'
+import image2 from '../assets/Taj.jpeg'
+import image3 from '../assets/temple1.jpeg'
+import image4 from '../assets/gateway.jpeg'
+import image5 from '../assets/kerela2.jpeg'
+import image6 from '../assets/tea.jpeg'
+
 
 const Destinations = () => {
   const [destinations, setDestinations] = useState([]);
@@ -34,26 +42,71 @@ const Destinations = () => {
   };
 
   const { destinationId } = useParams(); // Extract destinationId from URL params
-  console.log('Destination ID:', destinationId); 
+  console.log('Destination ID:', destinationId);
 
   return (
-    <div className="bg-black p-4">
+    <div className="">
+      <div class="bg-primary p-4">
+        <div class="overflow-hidden">
+          <div class="animate-marquee flex flex-row space-x-7">
+            <p class="text-lg text-white">Explore the vibrant culture of India!</p>
+            <p class="text-lg text-white">Experience the majestic beauty of the Taj Mahal!</p>
+            <p class="text-lg text-white">Discover the serene backwaters of Kerala!</p>
+            <p class="text-lg text-white">Trek through the breathtaking Himalayas!</p>
+            <p class="text-lg text-white">Indulge in the spicy flavors of Indian cuisine!</p>
+            <p class="text-lg text-white">Witness the spectacular festivals of India!</p>
+            <p class="text-lg text-white">Marvel at the architectural wonders of Rajasthan!</p>
+          </div>
+        </div>
+      </div>
+
+      <div className='flex flex-row w-full'>
+        <img src={image1} alt="Nature" className=" h-96 w-auto " />
+        <img src={image2} alt="Nature" className=" h-96 w-auto " />
+        <img src={image3} alt="Nature" className=" h-96 w-auto " />
+        <img src={image4} alt="Nature" className=" h-96 w-auto " />
+        <img src={image5} alt="Nature" className=" h-96 w-auto " />
+        <img src={image6} alt="Nature" className=" h-96  w-[300px]" />
+
+      </div>
+
       <h1 className='font-Montserrat uppercase text-accent text-center justify-center font-semibold text-5xl pt-20 pb-5'>Destinations</h1>
-      <div className="flex flex-wrap text-white w-3/4 mx-auto items-center justify-center">
+      <div className="flex flex-wrap text-black w-3/4 mx-auto items-center justify-center">
         {destinations.map(destination => {
           console.log('Destination ID:', destination.id); // Log destination ID
           return (
             <div
-              className="card m-2 border-[2px] border-white rounded-xl transition-transform duration-300 transform hover:scale-105 cursor-pointer"
+              className="card m-2 border-[2px] border-black rounded-xl transition-transform duration-300 transform hover:scale-105 cursor-pointer"
               key={destination.id}
               style={{ width: '18rem', height: '20rem' }}
               onClick={() => handleDestinationClick(destination.id)}
             >
               <div className="card-body h-full">
-                <h5 className="card-title text-accent text-center text-xl pb-4 pt-2">{destination.name}</h5>
+                <h5 className="card-title text-primary font-bold text-center text-xl pb-4 pt-2">{destination.name}</h5>
                 <p className="card-text px-3">{destination.description}</p>
-                <p className="card-text px-3 pt-4 text-accent font-bold">Location:</p>
-                <p className="card-text px-3 pt-2"> {destination.location}</p>
+
+                {/* Location Section */}
+                <div className="location-info px-3 py-4">
+                  <p className="card-text text-accent font-bold mb-2">Location:</p>
+                  <p className="card-text">{destination.location}</p>
+                </div>
+
+                {/* Rating Section */}
+                <div className="rating-info px-3 py-4">
+                  <p className="card-text text-accent font-bold mb-2">Rating:</p>
+                  <div className="flex items-center">
+
+                    <div className="flex">
+                      {[...Array(destination.rating)].map((_, index) => (
+                        <svg key={index} className="h-5 w-5 fill-current text-yellow-500" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M10 1l2.55 5.62L18 7.25l-4.65 4.5.99 5.86L10 15.75l-5.34 2.86.99-5.86L2 7.25l5.45-.63z" />
+                        </svg>
+                      ))}
+                    </div>
+                    <p className="card-text mr-2">{destination.rating}</p>
+                  </div>
+                </div>
+                <p className="pl-3 underline">Book Tour Now</p>
               </div>
             </div>
           );

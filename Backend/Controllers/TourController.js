@@ -67,7 +67,7 @@ exports.getAllToursWithNames = async (req, res) => {
       include: [
         { model: Destination, attributes: ['name', 'description', 'location'] }
       ],
-      attributes: ['tour_id', 'start_date', 'duration', 'price'] // Specify the attributes to include from the Tour model
+      attributes: ['tour_id','tour_name', 'start_date', 'duration', 'price'] // Specify the attributes to include from the Tour model
     });
 
     res.status(200).json({ tours });

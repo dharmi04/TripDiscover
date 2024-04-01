@@ -20,11 +20,11 @@ function App() {
     <>
       <Router>
         <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/destinations" element={<Destinations />} />
         <Route path="/tours/:destinationId" element={<ToursPage />} />
         <Route path="/book/:tour_id" element={<BookNow />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/alltours" element={<AllTours />} />
         </Routes>

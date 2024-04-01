@@ -20,7 +20,7 @@ exports.getAllDestinations = async (req, res) => {
   try {
     // Retrieve all destinations with only name, description, and location attributes
     const destinations = await Destination.findAll({
-      attributes: ['id','name', 'description', 'location']
+      attributes: ['id','name', 'description', 'location', 'rating']
     });
 
     res.status(200).json({ destinations });

@@ -32,7 +32,7 @@ const Login = () => {
         })
         .then(response => {
             //localStorage.setItem('token', response.data.token);
-            navigate('/'); // Redirect to home page
+            navigate('/home'); // Redirect to home page
         })
         .catch(error => {
             console.error("Login error:", error);
