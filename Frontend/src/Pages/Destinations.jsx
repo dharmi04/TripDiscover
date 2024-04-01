@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const Destinations = () => {
   const [destinations, setDestinations] = useState([]);
@@ -16,7 +17,7 @@ const Destinations = () => {
         console.error('Error fetching destinations:', error);
       }
     };
-  
+
     fetchDestinations();
   }, []);
 
@@ -31,28 +32,32 @@ const Destinations = () => {
       console.error('Error fetching tours:', error);
     }
   };
-  
-  
+
+  const { destinationId } = useParams(); // Extract destinationId from URL params
+  console.log('Destination ID:', destinationId); 
 
   return (
     <div className="bg-black p-4">
       <h1 className='font-Montserrat uppercase text-accent text-center justify-center font-semibold text-5xl pt-20 pb-5'>Destinations</h1>
       <div className="flex flex-wrap text-white w-3/4 mx-auto items-center justify-center">
-        {destinations.map(destination => (
-          <div
-            className="card m-2 border-[2px] border-white rounded-xl transition-transform duration-300 transform hover:scale-105 cursor-pointer"
-            key={destination.id} // Assign a unique key using destination.id
-            style={{ width: '18rem', height: '20rem' }} // Set a fixed height for the card
-            onClick={() => handleDestinationClick(destination.id)}
-          >
-            <div className="card-body h-full"> {/* Add h-full class to make the card body fill the height */}
-              <h5 className="card-title text-accent text-center text-xl pb-4 pt-2">{destination.name}</h5>
-              <p className="card-text px-3">{destination.description}</p>
-              <p className="card-text px-3 pt-4 text-accent font-bold">Location:</p>
-              <p className="card-text px-3 pt-2"> {destination.location}</p>
+        {destinations.map(destination => {
+          console.log('Destination ID:', destination.id); // Log destination ID
+          return (
+            <div
+              className="card m-2 border-[2px] border-white rounded-xl transition-transform duration-300 transform hover:scale-105 cursor-pointer"
+              key={destination.id}
+              style={{ width: '18rem', height: '20rem' }}
+              onClick={() => handleDestinationClick(destination.id)}
+            >
+              <div className="card-body h-full">
+                <h5 className="card-title text-accent text-center text-xl pb-4 pt-2">{destination.name}</h5>
+                <p className="card-text px-3">{destination.description}</p>
+                <p className="card-text px-3 pt-4 text-accent font-bold">Location:</p>
+                <p className="card-text px-3 pt-2"> {destination.location}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
 
       </div>
     </div>

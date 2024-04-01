@@ -20,7 +20,7 @@ exports.getAllDestinations = async (req, res) => {
   try {
     // Retrieve all destinations with only name, description, and location attributes
     const destinations = await Destination.findAll({
-      attributes: ['name', 'description', 'location']
+      attributes: ['id','name', 'description', 'location']
     });
 
     res.status(200).json({ destinations });
@@ -30,5 +30,16 @@ exports.getAllDestinations = async (req, res) => {
   }
 };
 
+exports.getDestinationByid = async(req, res) =>{
+  try{
+    const {id} = req.params;
+    const destination = await Destination.findOne({where: {id}});
+    res.status(200).json({destination});
+  }
+  catch(error){
+    console.error('Error fetching destination:', error);
+    res.status(500).json({ message: 'Server Error' });
+  }
+}
 
 

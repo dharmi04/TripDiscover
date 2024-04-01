@@ -62,30 +62,79 @@ exports.viewToursForDestination = async (req, res) => {
 };
 
 exports.getAllToursWithNames = async (req, res) => {
+  try {
+    const tours = await Tour.findAll({
+      include: [
+        { model: Destination, attributes: ['name', 'description', 'location'] }
+      ],
+      attributes: ['tour_id', 'start_date', 'duration', 'price'] // Specify the attributes to include from the Tour model
+    });
+
+    res.status(200).json({ tours });
+  } catch (error) {
+    console.error('Error fetching tours:', error);
+    res.status(500).json({ message: 'Server Error' });
+  }
+};
+
+
+
+  exports.getToursByDestinationId = async (req, res) => {
     try {
+      const { destinationId } = req.params;
       const tours = await Tour.findAll({
-        include: [
-          { model: Destination, attributes: ['name'] }, // Include the Destination model and retrieve its name attribute
-          { model: Guide, attributes: ['name'] } // Include the Guide model and retrieve its name attribute
-        ],
-        attributes: ['tour_id', 'start_date', 'duration', 'price'] // Specify the attributes to include from the Tour model
+        where: { destination_id: destinationId },
+        include: [Destination] // Include the Destination model to get the destination data
       });
   
-      res.status(200).json({ tours });
+      // Map tours data to include destination name
+      const toursWithDestinationName = tours.map(tour => ({
+        tour_id: tour.tour_id,
+        destination_id: tour.destination_id,
+        tour_name: tour.tour_name,
+        destination_name: tour.Destination.name, // Access destination name through the included Destination model
+        start_date: tour.start_date,
+        duration: tour.duration,
+        price: tour.price
+      }));
+  
+      res.status(200).json({ tours: toursWithDestinationName });
     } catch (error) {
       console.error('Error fetching tours:', error);
       res.status(500).json({ message: 'Server Error' });
     }
   };
+  
 
+  // Controller function to fetch details of a tour by tour ID
+exports.getTourById = async (req, res) => {
+  try {
+    const { tour_id } = req.params;
 
-  exports.getToursByDestinationId = async (req, res) => {
-    try {
-        const { destinationId } = req.params;
-        const tours = await Tour.findAll({ where: { destination_id: destinationId } });
-        res.status(200).json({ tours });
-    } catch (error) {
-        console.error('Error fetching tours:', error);
-        res.status(500).json({ message: 'Server Error' });
+    // Find the tour by its ID and include the destination information
+    const tour = await Tour.findByPk(tour_id, {
+      include: [Destination] // Include the Destination model to get the destination data
+    });
+
+    if (!tour) {
+      return res.status(404).json({ message: 'Tour not found' });
     }
+
+    // Construct the response including tour details and destination information
+    const tourDetails = {
+      tour_id: tour.tour_id,
+      destination_id: tour.destination_id,
+      tour_name: tour.tour_name,
+      destination_name: tour.Destination.name, // Access destination name through the included Destination model
+      start_date: tour.start_date,
+      duration: tour.duration,
+      price: tour.price
+      // Add more attributes as needed
+    };
+
+    res.status(200).json({ tour: tourDetails });
+  } catch (error) {
+    console.error('Error fetching tour details:', error);
+    res.status(500).json({ message: 'Server Error' });
+  }
 };

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import tourism from '../assets/Toursim1.jpeg';
 
 
+
 const Login = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
@@ -22,31 +23,23 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (formData.email === "" || formData.password === "") {
-            toast.error("Please fill all the fields")
-            return
-          }
-
-        //   try{
-        //      axios.post('http://localhost:8000/api/login-user', formData,{
-        //         withCredentials: true,
-        //     })
-
-
-        //     navigate('/')
-        //   }
-      
-        axios.post('http://localhost:8000/api/login-user', formData),{
-            withCredentials: true,
-        
-        } // Send formData in the request body
-            .then(response => {
-                localStorage.setItem('token', response.data.token);
-                navigate('/'); // Redirect to home page
-            })
-            .catch(error => {
-                console.error("Login error:", error);
-            });
+            toast.error("Please fill all the fields");
+            return;
+        }
+    
+        axios.post('http://localhost:8000/api/login-user', formData, {
+            //withCredentials: true,
+        })
+        .then(response => {
+            //localStorage.setItem('token', response.data.token);
+            navigate('/'); // Redirect to home page
+        })
+        .catch(error => {
+            console.error("Login error:", error);
+        });
     };
+    
+
 
     return (
         <div className="bg-indigo">
@@ -69,6 +62,12 @@ const Login = () => {
                                     <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} className="mt-1 p-2 w-full border-[3px] border-accent bg-transparent rounded-md" />
                                 </div>
                                 <button type="submit" className="bg-transparent text-white p-2 rounded-md w-full border-white border-[3px]">Log In</button>
+
+                                <div className='flex flex-row text-white space-x-96 text-xl '>
+           <p className='flex-start text-sm'>Already have an account?</p>
+            <p className=''><a href="/login"> Login</a></p>
+
+          </div>
                             </form>
                         </div>
                     </div>

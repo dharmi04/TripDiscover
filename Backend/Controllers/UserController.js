@@ -2,6 +2,7 @@ const User = require('../Models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+
 const saltRounds = 10;
 
 const createToken = (_id) => {
@@ -119,7 +120,7 @@ exports.loginUser = async (req, res) => {
     }
 
     // If email and password are correct, generate JWT token
-    const token = jwt.sign({ userId: user.id }, 'dharmi', { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user.id }, process.env.SECRET, { expiresIn: '1h' });
 
     // Respond with token
     res.status(200).json({ token });

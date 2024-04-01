@@ -3,7 +3,7 @@ const Booking = require('../Models/Booking');
 // Controller function to add a booking
 exports.addBooking = async (req, res) => {
   try {
-    const { tour_id, user_id, traveler_name, traveler_age, traveler_gender, traveler_aadhar_number } = req.body;
+    const {  traveler_name, traveler_age, traveler_gender, traveler_aadhar_number } = req.body;
 
     // Create the booking
     const booking = await Booking.create({ tour_id, user_id, traveler_name, traveler_age, traveler_gender, traveler_aadhar_number });

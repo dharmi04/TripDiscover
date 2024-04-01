@@ -14,7 +14,7 @@ router.post('/add-user', createUser);
 router.get('/users', getAllUsers);
 router.put('/update-user/:id', updateUser);
 router.delete('/delete-user/:id', deleteUser);
-router.post('/login-user',verifyToken, loginUser);
+router.post('/login-user', loginUser);
 // router.get('/search-user', searchUser);
 
 module.exports = router; 
