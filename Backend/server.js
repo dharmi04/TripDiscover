@@ -8,6 +8,8 @@ const DestinationRoutes = require('./Routes/Destination.js');
 const GuideRoutes = require('./Routes/Guide.js');
 const TourRoutes = require('./Routes/Tours.js');
 const BookingRoutes = require('./Routes/Booking.js');
+const AdminRoutes = require('./Routes/Admin.js');
+
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -19,6 +21,7 @@ app.use('/api', DestinationRoutes);
 app.use('/api', GuideRoutes);
 app.use('/api', TourRoutes);
 app.use('/api', BookingRoutes);
+app.use('/api', AdminRoutes);
 
 
 

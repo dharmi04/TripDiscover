@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import tourism from '../assets/Toursim1.jpeg';
+//import tourism from '../assets/Toursim1.jpeg';
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -61,7 +61,7 @@ const SignUp = () => {
           >
             Sign Up
           </button>
-          <p className="text-white text-lg text-center mt-4">Already have an account? <a href="/login" className="text-accent">Login</a></p>
+          <p className="text-white text-lg text-center mt-4">Already have an account? <a href="/login" className="text-white">Login</a></p>
         </form>
       </div>
     </div>
