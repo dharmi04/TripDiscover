@@ -5,8 +5,9 @@ const verifyToken = require('../Middleware/verifytokenmiddleware');
 const {
     addBooking
 } = require('../Controllers/BookingController');
+const { verify } = require('crypto');
 
-router.post('/add-booking',verifyToken, addBooking);
+router.post('/add-booking', addBooking);
 // router.get('/users', getAllUsers);
 // router.put('/update-user/:id', updateUser);
 // router.delete('/delete-user/:id', deleteUser);

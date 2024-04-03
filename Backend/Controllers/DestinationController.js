@@ -1,5 +1,5 @@
 const Destination = require('../Models/Destination');
-
+const { Op } = require('sequelize');
 exports.addDestination = async (req, res) => {
   try {
     const { name, description, location, rating } = req.body;
@@ -42,4 +42,21 @@ exports.getDestinationByid = async(req, res) =>{
   }
 }
 
+
+exports.searchDestinations = async (req, res) => {
+  const { query } = req.query;
+  try {
+    const destinations = await Destination.findAll({
+      where: {
+        name: {
+          [Op.like]: `%${query}%` // Search for destinations containing the query
+        }
+      }
+    });
+    res.json({ destinations });
+  } catch (error) {
+    console.error('Error searching destinations:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
 

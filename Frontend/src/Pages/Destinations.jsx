@@ -13,6 +13,7 @@ import image6 from '../assets/tea.jpeg'
 
 const Destinations = () => {
   const [destinations, setDestinations] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,6 +29,27 @@ const Destinations = () => {
 
     fetchDestinations();
   }, []);
+
+  const handleSearch = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8000/api/search-destinations?query=${searchQuery}`);
+      setDestinations(response.data.destinations);
+    } catch (error) {
+      console.error('Error searching destinations:', error);
+    }
+  };
+
+  const handleInputChange = async (e) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+
+    try {
+      const response = await axios.get(`http://localhost:8000/api/suggestions?query=${query}`);
+      setSuggestions(response.data.suggestions);
+    } catch (error) {
+      console.error('Error fetching suggestions:', error);
+    }
+  };
 
   const handleDestinationClick = async (destinationId) => {
     try {
@@ -70,8 +92,25 @@ const Destinations = () => {
 
       </div>
 
+      <div className='flex flex-row w-3/4 mx-auto p-8'>
+        <div className="w-1/2">
+          <p className='font-Montserrat md:text-xl text-xl font-semibold text-black pb-5'>Embark on a captivating journey through India's kaleidoscope of culture, history, and natural wonders.a</p>
+        </div>
+      <div className="w-1/2 ml-4">
+      <input
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="Search destinations..."
+          className="p-2 border border-black rounded-md w-1/2 h-15"
+        />
+        <button onClick={handleSearch} className='bg-accent ml-4 text-white px-4 py-2  rounded-md shadow-md shadow-gray-500 '>Search</button>
+      </div>
+      </div>
+      <div  className='w-3/4 mx-auto'>
+
       <h1 className='font-Montserrat uppercase text-accent text-center justify-center font-semibold text-5xl pt-20 pb-5'>Destinations</h1>
-      <div className="flex flex-wrap text-black w-3/4 mx-auto items-center justify-center">
+      <div className="flex flex-wrap text-black items-center justify-center">
         {destinations.map(destination => {
           console.log('Destination ID:', destination.id); // Log destination ID
           return (
@@ -112,6 +151,7 @@ const Destinations = () => {
           );
         })}
 
+      </div>
       </div>
     </div>
   );

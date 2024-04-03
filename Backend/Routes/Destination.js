@@ -5,12 +5,14 @@ const verifyToken = require('../Middleware/verifytokenmiddleware');
 const {
     addDestination,
     getAllDestinations,
-    getDestinationByid
+    getDestinationByid,
+    searchDestinations
 } = require('../Controllers/DestinationController');
 
-router.post('/add-destination',verifyToken, addDestination);
+router.post('/add-destination',addDestination);
 router.get('/all-destinations', getAllDestinations);
 router.get('/destination/:id', getDestinationByid);
+router.get('/search-destinations', searchDestinations);
 
 
 module.exports = router; 

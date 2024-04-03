@@ -26,7 +26,7 @@ const SignUp = () => {
       .post("http://localhost:8000/api/add-user", formData)
       .then(response => {
         console.log(response);
-        navigate('/home');
+        navigate('/userlogin');
       })
       .catch(error => {
         console.error("Signup error:", error);
@@ -61,7 +61,7 @@ const SignUp = () => {
           >
             Sign Up
           </button>
-          <p className="text-white text-lg text-center mt-4">Already have an account? <a href="/login" className="text-white">Login</a></p>
+          <p className="text-white text-lg text-center mt-4">Already have an account? <a href="/userlogin" className="text-white">Login</a></p>
         </form>
       </div>
     </div>

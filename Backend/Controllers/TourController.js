@@ -1,7 +1,7 @@
 const Tour = require('../Models/Tour');
 const Destination = require('../Models/Destination');
-const Guide = require('../Models/Guide');
 
+const { Op } = require('sequelize');
 // Controller function to add a tour for a specific destination
 exports.addTour = async (req, res) => {
   try {
@@ -136,5 +136,28 @@ exports.getTourById = async (req, res) => {
   } catch (error) {
     console.error('Error fetching tour details:', error);
     res.status(500).json({ message: 'Server Error' });
+  }
+};
+
+
+exports.searchTours = async (req, res) => {
+  const { query } = req.query;
+  try {
+    const tours = await Tour.findAll({
+      where: {
+        [Op.or]: [
+          { tour_name: { [Op.like]: `%${query}%` } }, // Search for tours containing the query in the tour_name column
+          { '$Destination.name$': { [Op.like]: `%${query}%` } } // Search for tours with destination containing the query
+        ]
+      },
+      include: [{
+        model: Destination,
+        attributes: ['name']
+      }]
+    });
+    res.json({ tours });
+  } catch (error) {
+    console.error('Error searching tours:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 };

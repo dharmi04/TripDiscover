@@ -27,6 +27,10 @@ exports.signup = async (req, res) => {
     const { email, password } = req.body;
   
     try {
+      if (!email) {
+        return res.status(400).json({ error: 'Email is required' });
+    }
+
       // Retrieve admin from database by email
       if (!email.endsWith('@tripdiscover.co.in')) {
         return res.status(400).json({ error: 'Invalid email ' });
