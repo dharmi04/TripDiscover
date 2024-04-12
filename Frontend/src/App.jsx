@@ -17,7 +17,9 @@ import AdminLogin from './Pages/Admin/AdminLogin';
 import Dashboard from './Pages/Admin/Dashboard';
 import PrivateRoute from './Routes/PrivateRoute.jsx';
 import AddDestination from './Pages/Admin/AddDestination';
-
+import UserDashboard from './Pages/UserDashboard';
+import AddTours from './Pages/Admin/AddTours';
+import AllUsers from './Pages/Admin/AllUsers';
 
 
 function App() {
@@ -60,6 +62,12 @@ function App() {
         {/* <PrivateRoute path="/admin/dashboard" element={<Dashboard />} isAuthenticated={isAuthenticated} /> */}
 
         <Route path="/admin/add-destination" element={<AddDestination />} />
+
+        <Route path="/admin/add-tours" element={<AddTours/>} />
+
+        <Route path="/admin/allusers" element={<AllUsers /> } />
+
+        <Route path="/user/profile" element={<UserDashboard />} />
         </Routes>
       </Router>
 

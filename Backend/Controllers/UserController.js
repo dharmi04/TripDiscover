@@ -9,6 +9,9 @@ const createToken = (_id) => {
   return jwt.sign({ _id }, process.env.SECRET, { expiresIn: '100d' });
 };
 
+
+
+
 exports.createUser = async (req, res) => {
   const { name, email, password, bio } = req.body;
   try {
@@ -35,22 +38,7 @@ exports.createUser = async (req, res) => {
 
 
 
-exports.getAllUsers = async (req, res) => {
-  try {
-    // Fetch only the names of users
-    const users = await User.findAll({
-      attributes: ['name']
-    });
 
-    // Extract the names from the user objects
-    const userNames = users.map(user => user.name);
-
-    res.status(200).json({ userNames });
-  } catch (error) {
-    console.error('Error fetching users:', error);
-    res.status(500).json({ message: 'Server Error' });
-  }
-};
 
 
 exports.updateUser = async (req, res) => {
@@ -120,12 +108,78 @@ exports.loginUser = async (req, res) => {
     }
 
     // If email and password are correct, generate JWT token
-    const token = jwt.sign({ userId: user.id }, process.env.SECRET, { expiresIn: '1h' });
-
-    // Respond with token
-    res.status(200).json({ token });
+    try {
+      const token = jwt.sign({ userId: user.id }, process.env.SECRET, { expiresIn: '100d' });
+      res.status(200).json({ token });
+      console.log(token)
+      // Continue processing if token is valid
+    } catch (error) {
+      console.error(error);
+      return res.status(401).json({ error: "Invalid token" });
+    }
+    
   } catch (error) {
     console.error('Error logging in:', error);
+    res.status(500).json({ message: 'Server Error' });
+  }
+};
+
+
+exports.getUserProfile = async (req, res) => {
+  try {
+    // Access user details from request object
+    const { id, name, email, bio } = req.user;
+
+    // Respond with user profile
+    res.status(200).json({ id, name, email, bio });
+  } catch (error) {
+    console.error('Error fetching user profile:', error);
+    res.status(500).json({ message: 'Server Error' });
+  }
+};
+
+module.exports.getCurrentUser = async (req, res) => {
+  const authHeader = req.headers["authorization"];
+  if (!authHeader) {
+    return res.status(401).json({ error: "Authorization token is required" });
+  }
+  const token = authHeader.split(" ")[1];
+  try {
+    const verifyToken = jwt.verify(token, "123");
+    const user = await User.findOne({ email: verifyToken.email });
+    if (!user) {
+      return res.status(401).json({ error: "User not found" });
+    }
+    return res.json({
+      id: user._id,
+      fullname: user.fullname,
+      email: user.email
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(401).json({ error: "Invalid token" });
+  }
+};
+
+
+
+exports.getAllUsers = async (req, res) => {
+  try {
+    // Fetch all users from the database
+    const users = await User.findAll({
+      attributes: ['name', 'email'] // Select only 'name' and 'email' attributes
+    });
+
+    // Extracting only name and email from each user object
+    const formattedUsers = users.map(user => ({
+      name: user.name,
+      email: user.email
+    }));
+
+    // Respond with the formatted user data
+    res.status(200).json(formattedUsers);
+  } catch (error) {
+    console.error('Error fetching users:', error);
     res.status(500).json({ message: 'Server Error' });
   }
 };

@@ -28,6 +28,10 @@ const Booking = require('../Models/Booking');
 exports.addBooking = async (req, res) => {
   try {
     // Extract user_id from authenticated user (assuming it's stored in req.user)
+    // if (!req.user || !req.user.user_id) {
+    //   return res.status(401).json({ error: 'Unauthorized' });
+    // }
+
     const { user_id } = req.user;
     const { traveler_name, traveler_age, traveler_gender, traveler_aadhar_number } = req.body;
 
@@ -35,6 +39,7 @@ exports.addBooking = async (req, res) => {
     const booking = await Booking.create({ user_id, traveler_name, traveler_age, traveler_gender, traveler_aadhar_number });
 
     res.status(201).json({ booking });
+    res.status(200).json({ message: 'Booking added successfully' });
   } catch (error) {
     console.error('Error adding booking:', error);
     res.status(500).json({ message: 'Server Error' });

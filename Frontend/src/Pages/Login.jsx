@@ -27,6 +27,9 @@ const Login = () => {
 
     axios.post('http://localhost:8000/api/login-user', formData)
       .then(response => {
+        const token = response.data.token;
+        console.log("Token:", token)
+        localStorage.setItem('token', token);
         navigate('/home'); // Redirect to home page
       })
       .catch(error => {

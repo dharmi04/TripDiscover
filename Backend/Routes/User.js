@@ -1,13 +1,15 @@
 const express = require('express'); 
 const router = express.Router();
 const verifyToken = require('../Middleware/verifytokenmiddleware');
-
+const auth = require('../Middleware/authenticateUser');
 const {
     createUser,
     getAllUsers,
     updateUser,
     deleteUser,
-    loginUser
+    loginUser,
+    getUserProfile,
+    getCurrentUser
 } = require('../Controllers/UserController');
 
 router.post('/add-user', createUser);
@@ -15,6 +17,8 @@ router.get('/users', getAllUsers);
 router.put('/update-user/:id', updateUser);
 router.delete('/delete-user/:id', deleteUser);
 router.post('/login-user', loginUser);
+router.get('/get-user', auth, getUserProfile);
+router.get('/get-current-user', verifyToken, getCurrentUser);
 // router.get('/search-user', searchUser);
 
 module.exports = router; 
