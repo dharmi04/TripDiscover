@@ -1,5 +1,5 @@
 
-# TourFinder
+# TripDiscover
 
 TourFinder is a web application that helps users discover and book tours to specific destinations. It is built using Node.js with a MySQL database, utilizing the Sequelize library for ORM (Object-Relational Mapping).
 
@@ -15,7 +15,7 @@ TourFinder is a web application that helps users discover and book tours to spec
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/dharmi04/tourfinder.git
+   git clone https://github.com/dharmi04/TripDiscover.git
    ```
 
 2. **Navigate to the Backend directory:**
@@ -30,7 +30,7 @@ TourFinder is a web application that helps users discover and book tours to spec
    npm install
    ```
 
-4. **Set up MySQL database named "Tourfinder"**
+4. **Set up MySQL database named "TourDiscover"**
 
 5. **Create a `.env` file in the Backend folder containing:**
 
@@ -49,3 +49,20 @@ TourFinder is a web application that helps users discover and book tours to spec
    npm run dev
    ```
 
+7. **Navigate to the Frontend directory:**
+
+   ```bash
+   cd Frontend
+   ```
+
+8. **Install dependencies using npm:**
+
+   ```bash
+   npm install
+   ```
+
+10. **Start the server:**
+
+   ```bash
+   npm run dev
+   ```

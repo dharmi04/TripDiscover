@@ -21,14 +21,22 @@ const AllUsers = () => {
   return (
     <div className="container mx-auto mt-8">
       <h1 className="text-2xl font-bold mb-4">User List</h1>
-      <ul>
-        {users.map((user, index) => (
-          <li key={index} className="bg-gray-100 rounded-md p-4 mb-2">
-            <p className="font-semibold">{user.name}</p>
-            <p className="text-gray-600">{user.email}</p>
-          </li>
-        ))}
-      </ul>
+      <table className="table-auto justify-center items-start align-middle">
+        <thead>
+          <tr>
+            <th className="px-4 py-2">Name</th>
+            <th className="px-4 py-2">Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map((user, index) => (
+            <tr key={index} className="bg-gray-100 rounded-md">
+              <td className="border px-4 py-2">{user.name}</td>
+              <td className="border px-4 py-2">{user.email}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

@@ -24,11 +24,8 @@ exports.createUser = async (req, res) => {
     // Generate token
     console.log(user.ID)
     const token = createToken(user._id);
-    
-
     // Set user session
     // req.session.user = { name: user.name, email: user.email, bio: user.bio };
-
     // Respond with token and user email
     res.status(200).json({ email: user.email, token });
   } catch (error) {
@@ -98,26 +95,20 @@ exports.loginUser = async (req, res) => {
 
     // If user not found, return error
     if (!user) {
-      return res.status(401).json({ error: 'Invalid email or password' });
+      return res.status(401).json({ error: 'Invalid email' });
     }
 
     // Check if the password is correct
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      return res.status(401).json({ error: 'Invalid email or password' });
+      return res.status(401).json({ error: 'Invalid password' });
     }
 
     // If email and password are correct, generate JWT token
-    try {
       const token = jwt.sign({ userId: user.id }, process.env.SECRET, { expiresIn: '100d' });
       res.status(200).json({ token });
       console.log(token)
       // Continue processing if token is valid
-    } catch (error) {
-      console.error(error);
-      return res.status(401).json({ error: "Invalid token" });
-    }
-    
   } catch (error) {
     console.error('Error logging in:', error);
     res.status(500).json({ message: 'Server Error' });
@@ -126,17 +117,25 @@ exports.loginUser = async (req, res) => {
 
 
 exports.getUserProfile = async (req, res) => {
-  try {
-    // Access user details from request object
-    const { id, name, email, bio } = req.user;
+  const user = req.user;
 
-    // Respond with user profile
-    res.status(200).json({ id, name, email, bio });
-  } catch (error) {
-    console.error('Error fetching user profile:', error);
-    res.status(500).json({ message: 'Server Error' });
+  // Check if user object exists and contains required properties
+  if (user && user.name && user.email && user.bio) {
+    // Store user details in the session
+    req.session.user = {
+      name: user.name,
+      email: user.email,
+      bio: user.bio
+    };
+    // Send user details in the response
+    res.status(200).json(req.session.user);
+  } else {
+    // If user object is not available or does not contain required properties, send 404 error
+    res.status(404).json({ message: 'User not found or user details incomplete' });
   }
 };
+
+
 
 module.exports.getCurrentUser = async (req, res) => {
   const authHeader = req.headers["authorization"];

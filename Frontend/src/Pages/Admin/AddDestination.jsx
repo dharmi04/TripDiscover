@@ -25,40 +25,61 @@ const AddDestination= () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto bg-white p-8 mt-10 rounded-md shadow-md">
-      <h2 className="text-xl mb-4">Add Destination</h2>
-      <input
+    <div className="bg-white flex justify-center items-center min-h-screen">
+
+    <div className="bg-accent rounded-lg p-10 shadow-lg w-[400px] ">
+       <h2 className="text-white text-xl font-bold mb-6 text-center uppercase font-Montserrat">Add Destination</h2>
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div>
+        <label htmlFor="name" className="block text-lg font-medium text-white">Name</label>
+        <input
         type="text"
         placeholder="Name"
         value={name}
         onChange={(e) => setName(e.target.value)}
-        className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mb-3"
+        className="mt-1 p-2 text-black w-full rounded-md"
       />
+      </div>
+      
+      <div>
+      <label htmlFor="password" className="block text-lg font-medium text-white">Description</label>
       <input
         type="text"
         placeholder="Description"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
-        className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mb-3"
+        className="mt-1 p-2 text-black w-full rounded-md"
       />
+      </div>
+
+      <div>
+      <label htmlFor="password" className="block text-lg font-medium text-white">Location</label>
+
       <input
         type="text"
         placeholder="Location"
         value={location}
         onChange={(e) => setLocation(e.target.value)}
-        className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mb-3"
+        className="mt-1 p-2 text-black w-full rounded-md"
       />
+      </div>
+
+      <div>
+      <label htmlFor="password" className="block text-lg font-medium text-white">Rating</label>
       <input
         type="number"
         placeholder="Rating"
         value={rating}
         onChange={(e) => setRating(e.target.value)}
-        className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mb-3"
+        className="mt-1 p-2 text-black w-full rounded-md"
       />
-      <button type="submit" className="w-full bg-indigo-500 text-black rounded-md py-2 px-4 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">
+      </div>
+      <button type="submit" className="bg-white text-black p-2 rounded-md w-full">
         Add Destination
       </button>
     </form>
+    </div>
+    </div>
   );
 };
 
