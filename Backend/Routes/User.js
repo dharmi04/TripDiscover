@@ -1,7 +1,7 @@
 const express = require('express'); 
 const router = express.Router();
 const verifyToken = require('../Middleware/verifytokenmiddleware');
-const auth = require('../Middleware/authenticateUser');
+const auth = require('../Middleware/authMiddleware');
 const {
     createUser,
     getAllUsers,

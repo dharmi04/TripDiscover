@@ -1,34 +1,53 @@
 const Destination = require('../Models/Destination');
 const { Op } = require('sequelize');
-exports.addDestination = async (req, res) => {
-  try {
-    const { name, description, location, rating } = req.body;
+const multer = require('multer');
+const path = require('path');
 
-    // Create the destination
-    const destination = await Destination.create({ name, description, location, rating });
-
-    res.status(201).json({ destination });
-  } catch (error) {
-    console.error('Error adding destination:', error);
-    res.status(500).json({ message: 'Server Error' });
+// Multer storage configuration
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/'); // Ensure this directory exists
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname));
   }
-};
+});
 
+const upload = multer({ storage: storage });
+
+// Update addDestination function to use multer
+exports.addDestination = [
+  upload.single('image'),
+  async (req, res) => {
+    try {
+      console.log('Request body:', req.body);
+      console.log('File:', req.file);
+
+      const { name, description, location, rating } = req.body;
+      const imagePath = req.file ? req.file.path : null;
+
+      // Create the destination
+      const destination = await Destination.create({ name, description, location, rating, imagePath });
+
+      res.status(201).json({ destination });
+    } catch (error) {
+      console.error('Error adding destination:', error);
+      res.status(500).json({ message: 'Server Error' });
+    }
+  }
+];
 
 
 exports.getAllDestinations = async (req, res) => {
   try {
-    // Retrieve all destinations with only name, description, and location attributes
-    const destinations = await Destination.findAll({
-      attributes: ['id','name', 'description', 'location', 'rating']
-    });
-
+    const destinations = await Destination.findAll();
     res.status(200).json({ destinations });
   } catch (error) {
     console.error('Error fetching destinations:', error);
     res.status(500).json({ message: 'Server Error' });
   }
 };
+
 
 exports.getDestinationByid = async(req, res) =>{
   try{

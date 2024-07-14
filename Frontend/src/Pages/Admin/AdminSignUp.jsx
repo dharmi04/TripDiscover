@@ -35,33 +35,33 @@ const AdminSignUp = () => {
   };
 
   return (
-    <div className="bg-white flex justify-center items-center min-h-screen">
-      <div className="bg-accent rounded-lg p-10 shadow-lg w-[600px]">
-        <h1 className="font-Montserrat uppercase text-center text-white text-2xl font-semibold mb-5">Admin Panel</h1>
-        <h2 className="text-white text-xl font-bold mb-6 text-center uppercase font-Montserrat">Admin Sign Up</h2>
+    <div className="bg-gradient-to-br from-white via-gray-500 to-black flex justify-center items-center min-h-screen">
+      <div className="bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg rounded-lg p-10 shadow-lg w-[600px]">
+        <h1 className="font-Montserrat uppercase text-center text-black text-2xl font-semibold mb-5">Admin Panel</h1>
+        <h2 className="text-black text-xl font-bold mb-6 text-center uppercase font-Montserrat">Admin Sign Up</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="name" className="block text-lg font-medium text-white">Name</label>
+            <label htmlFor="name" className="block text-lg font-medium text-black">Name</label>
             <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} className="mt-1 p-2 text-black w-full rounded-md" required />
           </div>
           <div>
-            <label htmlFor="email" className="block text-lg font-medium text-white">Email</label>
+            <label htmlFor="email" className="block text-lg font-medium text-black">Email</label>
             <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} className="mt-1 p-2 text-black w-full rounded-md" required  />
           </div>
           <div>
-            <label htmlFor="password" className="block text-lg font-medium text-white">Password</label>
+            <label htmlFor="password" className="block text-lg font-medium text-black">Password</label>
             <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} className="mt-1 p-2 text-black w-full rounded-md" required  />
           </div>
           <div>
-            <label htmlFor="department" className="block text-lg font-medium text-white">Department</label>
+            <label htmlFor="department" className="block text-lg font-medium text-black">Department</label>
             <input type="text" id="department" name="department" value={formData.department} onChange={handleChange} className="mt-1 p-2 text-black w-full rounded-md" required  />
           </div>
           <div>
-            <label htmlFor="contact" className="block text-lg font-medium text-white">Contact</label>
+            <label htmlFor="contact" className="block text-lg font-medium text-black">Contact</label>
             <input type="text" id="contact" name="contact" value={formData.contact} onChange={handleChange} className="mt-1 p-2 text-black w-full rounded-md" required  />
           </div>
           <div>
-            <label htmlFor="personal_mail_id" className="block text-lg font-medium text-white">Personal Email ID</label>
+            <label htmlFor="personal_mail_id" className="block text-lg font-medium text-black">Personal Email ID</label>
             <input type="email" id="personal_mail_id" name="personal_mail_id" value={formData.personal_mail_id} onChange={handleChange} className="mt-1 p-2 text-black w-full rounded-md" required  />
           </div>
           <button
@@ -70,7 +70,7 @@ const AdminSignUp = () => {
           >
             Sign Up
           </button>
-          <p className="text-white text-lg text-center mt-4">Already have an account? <a href="/admin/login" className="text-white">Login</a></p>
+          <p className="text-black text-lg text-center mt-4">Already have an account? <a href="/admin/login" className="text-black underline">Login</a></p>
         </form>
       </div>
     </div>

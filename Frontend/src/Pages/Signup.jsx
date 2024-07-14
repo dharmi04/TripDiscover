@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-//import tourism from '../assets/Toursim1.jpeg';
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -22,37 +21,45 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("Form Data being sent:", formData);
     axios
-      .post("http://localhost:8000/api/add-user", formData)
+      .post("http://localhost:8000/api/add-user", formData, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
       .then(response => {
-        console.log(response);
+        console.log("User added successfully:", response);
         navigate('/userlogin');
       })
       .catch(error => {
         console.error("Signup error:", error);
+        if (error.response) {
+          console.error("Error response data:", error.response.data);
+        }
       });
   };
 
   return (
-    <div className="bg-white flex justify-center items-center min-h-screen">
-      <div className=" bg-accent rounded-lg p-10 shadow-lg  w-[600px]">
-        <h1 className="font-Montserrat uppercase text-center text-white text-2xl font-semibold mb-5">Trip Discover</h1>
-        <h2 className="text-white text-xl font-bold mb-6 text-center uppercase font-Montserrat">Sign Up</h2>
+    <div className="bg-gradient-to-br from-white via-gray-500 to-black flex p-8 justify-center items-center min-h-screen">
+      <div className="bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg rounded-lg p-10 shadow-lg w-[600px]">
+        <h1 className="font-Montserrat uppercase text-center text-black text-2xl font-semibold mb-5">Trip Discover</h1>
+        <h2 className="text-black text-xl font-bold mb-6 text-center uppercase font-Montserrat">Sign Up</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="name" className="block text-lg font-medium text-white">Name</label>
+            <label htmlFor="name" className="block text-lg font-medium text-black">Name</label>
             <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} className="mt-1 p-2 text-black w-full rounded-md" />
           </div>
           <div>
-            <label htmlFor="email" className="block text-lg font-medium text-white">Email</label>
+            <label htmlFor="email" className="block text-lg font-medium text-black">Email</label>
             <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} className="mt-1 p-2 text-black w-full rounded-md" />
           </div>
           <div>
-            <label htmlFor="password" className="block text-lg font-medium text-white">Password</label>
+            <label htmlFor="password" className="block text-lg font-medium text-black">Password</label>
             <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} className="mt-1 p-2 text-black w-full rounded-md" />
           </div>
           <div>
-            <label htmlFor="bio" className="block text-lg font-medium text-white">Bio</label>
+            <label htmlFor="bio" className="block text-lg font-medium text-black">Bio</label>
             <textarea id="bio" name="bio" value={formData.bio} onChange={handleChange} className="mt-1 p-2 w-full text-black rounded-md"></textarea>
           </div>
           <button
@@ -61,7 +68,7 @@ const SignUp = () => {
           >
             Sign Up
           </button>
-          <p className="text-white text-lg text-center mt-4">Already have an account? <a href="/userlogin" className="text-white">Login</a></p>
+          <p className="text-black text-lg text-center mt-4">Already have an account? <a href="/userlogin" className="text-black underline">Login</a></p>
         </form>
       </div>
     </div>

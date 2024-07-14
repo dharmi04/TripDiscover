@@ -3,27 +3,45 @@ const Destination = require('../Models/Destination');
 
 const { Op } = require('sequelize');
 // Controller function to add a tour for a specific destination
-exports.addTour = async (req, res) => {
-  try {
-    const { destination_id,tour_name, start_date, duration, price } = req.body;
+const multer = require('multer');
+const path = require('path');
 
-    // Find the destination ID based on the provided name
-    // const destination = await Destination.findOne({ where: { name: destination_id } });
-
-    // if (!destination) {
-    //   return res.status(404).json({ message: 'Destination not found' });
-    // }
-
-    // Create the tour
-    const tour = await Tour.create({ destination_id, tour_name, start_date, duration, price });
-
-    res.status(201).json({ tour });
-  } catch (error) {
-    console.error('Error adding tour:', error);
-    res.status(500).json({ message: 'Server Error' });
+// Multer storage configuration
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/');
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname));
   }
-};
+});
 
+const upload = multer({ storage: storage });
+
+exports.addTour = [
+  upload.single('image'),
+  async (req, res) => {
+    try {
+      const { destination_id, tour_name, start_date, duration, price } = req.body;
+      const imagePath = req.file ? req.file.path : null;
+
+      // Create the tour
+      const tour = await Tour.create({
+        destination_id,
+        tour_name,
+        start_date,
+        duration,
+        price,
+        imagePath
+      });
+
+      res.status(201).json({ tour });
+    } catch (error) {
+      console.error('Error adding tour:', error);
+      res.status(500).json({ message: 'Server Error' });
+    }
+  }
+];
 // Controller function to delete a tour
 exports.deleteTour = async (req, res) => {
   try {

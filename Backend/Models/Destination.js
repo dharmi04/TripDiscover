@@ -29,7 +29,11 @@ const Destination = sequelize.define('Destination', {
   rating: {
     type: DataTypes.STRING,
     allowNull: true
+  },
+  imagePath: {
+    type: DataTypes.STRING,
+    allowNull: true
   }
-},{ timestamps: false });
+}, { timestamps: false });
 
 module.exports = Destination;

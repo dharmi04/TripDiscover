@@ -3,7 +3,7 @@ import image from '../assets/tourist.jpeg'
 
 const Tours = () => {
   return (
-    <div className='w-3/4 mx-auto flex md:flex-row flex-col md:pt-8 md:pb-8 mt-20 mb-30 ' >
+    <div className='w-3/4 mx-auto flex md:flex-row flex-col md:pt-8 md:pb-8 mt-20 mb-30 ' id="tours" >
       <div className='md:w-1/2 md:mr-4 md:block hidden '>
         <img src={image} className='md:rounded-xl md:h-[700px] h-[250px] w-full shadow-md shadow-gray-700 ' />
       </div>

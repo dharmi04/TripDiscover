@@ -35,14 +35,7 @@ const Tour = sequelize.define('Tour', {
     type: DataTypes.TEXT, // Assuming the tour name is a string
     allowNull: false
   },
-  // guide_id: {
-  //   type: DataTypes.INTEGER,
-  //   allowNull: false,
-  //   references: {
-  //     model: 'Guides',
-  //     key: 'guide_id'
-  //   }
-  // },
+  
   start_date: {
     type: DataTypes.DATE,
     allowNull: false
@@ -54,6 +47,10 @@ const Tour = sequelize.define('Tour', {
   price: {
     type: DataTypes.FLOAT,
     allowNull: false
+  },
+  imagePath: {
+    type: DataTypes.STRING ,// Adjust this according to your file path configuration
+    allowNull: true
   }
 },{ timestamps: false });
 

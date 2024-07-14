@@ -43,7 +43,7 @@ const Explore = () => {
 
 
   return (
-    <div className='w-3/4 mx-auto'>
+    <div className='w-3/4 mx-auto' id="destination">
       <div className='flex flex-row'>
         <div className='w-1/2 pt-8'>
           <p className='text-gray-500'>Best Location</p>

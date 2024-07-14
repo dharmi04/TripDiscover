@@ -9,7 +9,7 @@ import Kerela from '../assets/Kerela.png';
 
 const Discover = () => {
   return (
-    <div className=''>
+    <div className='' id="gallery">
       <div className='w-3/4 mx-auto flex md:flex-row flex-col '>
         <div className='md:w-1/2 '>
           <div className='pt-10'>

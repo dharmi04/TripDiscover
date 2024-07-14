@@ -13,26 +13,22 @@ const createToken = (_id) => {
 
 
 exports.createUser = async (req, res) => {
+  console.log("Request Body:", req.body); // Log the request body
   const { name, email, password, bio } = req.body;
-  try {
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-    // Create a new user with hashed password
-    const user = await User.create({ name, email, password: hashedPassword, bio });
-    // console.log(user)
-
-    // Generate token
-    console.log(user.ID)
-    const token = createToken(user._id);
-    // Set user session
-    // req.session.user = { name: user.name, email: user.email, bio: user.bio };
-    // Respond with token and user email
-    res.status(200).json({ email: user.email, token });
-  } catch (error) {
-    res.status(400).json({ error: error.message });
+  // Simple validation
+  if (!name || !email || !password || !bio) {
+    return res.status(400).json({ error: 'All fields are required.' });
   }
-};
 
+  // Insert into database
+  User.create({ name, email, password, bio })
+    .then(user => res.status(201).json(user))
+    .catch(error => {
+      console.error("Database error:", error);
+      res.status(500).json({ error: 'An error occurred.' });
+    });
+}
 
 
 

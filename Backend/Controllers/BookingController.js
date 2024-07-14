@@ -1,48 +1,35 @@
 const Booking = require('../Models/Booking');
 
-// Controller function to add a booking
 
 
-// Controller function to add a booking
-// exports.addBooking = async (req, res) => {
-//   try {
-//     const { tour_id, user_id, traveler_name, traveler_age, traveler_gender, traveler_aadhar_number } = req.body;
-
-//     // Check if tour_id is provided
-//     if (!tour_id) {
-//       return res.status(400).json({ message: 'Tour ID is required' });
-//     }
-
-//     // Create the booking
-//     const booking = await Booking.create({ tour_id, user_id, traveler_name, traveler_age, traveler_gender, traveler_aadhar_number });
-
-//     res.status(201).json({ booking });
-//   } catch (error) {
-//     console.error('Error adding booking:', error);
-//     res.status(500).json({ message: 'Server Error' });
-//   }
-// };
-
-
-// Controller function to add a booking
 exports.addBooking = async (req, res) => {
   try {
-    // Extract user_id from authenticated user (assuming it's stored in req.user)
-    // if (!req.user || !req.user.user_id) {
-    //   return res.status(401).json({ error: 'Unauthorized' });
-    // }
+    const { user_id } = req.user.user_id; // Assuming user_id is available from authentication middleware
+    const { tour_id, traveler_name, traveler_age, traveler_gender, traveler_aadhar_number } = req.body;
 
-    const { user_id } = req.user;
-    const { traveler_name, traveler_age, traveler_gender, traveler_aadhar_number } = req.body;
+    if (!tour_id || !traveler_name || !traveler_age|| traveler_aadhar_number ) {
+      return res.status(400).json({ error: 'Tour ID, traveler name, and traveler age are required' });
+    }
 
-    // Create the booking with associated user_id
-    const booking = await Booking.create({ user_id, traveler_name, traveler_age, traveler_gender, traveler_aadhar_number });
+     // Check if tour exists
+     const tour = await Tour.findByPk(tour_id);
+     if (!tour) {
+       return res.status(404).json({ error: 'Tour not found' });
+     }
 
-    res.status(201).json({ booking });
-    res.status(200).json({ message: 'Booking added successfully' });
+    const booking = await Booking.create({
+      user_id,
+      tour_id,
+      traveler_name,
+      traveler_age,
+      traveler_gender,
+      traveler_aadhar_number
+    });
+
+     res.status(201).json({ message: 'Booking successful', booking });
+
   } catch (error) {
-    console.error('Error adding booking:', error);
-    res.status(500).json({ message: 'Server Error' });
+    console.error('Error booking tour:', error);
+    res.status(500).json({ error: 'Server Error' });
   }
 };
-

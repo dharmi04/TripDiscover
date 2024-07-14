@@ -6,9 +6,9 @@ const {
     addBooking
 } = require('../Controllers/BookingController');
 const { verify } = require('crypto');
-const authenticateUser = require('../Middleware/authenticateUser');
+const authMiddleware = require('../Middleware/authMiddleware');
 
-router.post('/add-booking', authenticateUser, addBooking);
+router.post('/add-booking', authMiddleware, addBooking);
 // router.get('/users', getAllUsers);
 // router.put('/update-user/:id', updateUser);
 // router.delete('/delete-user/:id', deleteUser);
